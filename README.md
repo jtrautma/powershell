@@ -1,7 +1,8 @@
 # powershell
 This repository features some of my powershell code and my powershell cookbook reference
 
-*Enable PS Script execution on Windows*
++Enable PS Script execution on Windows+
+
 If your powershell on Windows complains that it is not allowed to run scripts, then follow these steps:
 1) Run Powershell as Administrator
 2) Determine what the execution policy is set to:
