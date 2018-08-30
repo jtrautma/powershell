@@ -1,3 +1,5 @@
+## THIS SCRIPT STARTS INTERNET EXPLORER AND RUNS A NUMBER OF SEARCH ENGINE QUERIES
+
 $bingUrl = "https://www.bing.com/search?q="
 $ie = new-object -ComObject "InternetExplorer.Application"
 $ie.visible = $true
