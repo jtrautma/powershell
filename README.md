@@ -1,5 +1,5 @@
-# powershell
-This repository features some of my powershell code and my powershell cookbook reference
+# PowerShell
+This repository features some of my PowerShell code and my wee ps-reference
 
 **Enable PS Script execution on Windows**
 
