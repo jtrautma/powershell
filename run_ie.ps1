@@ -25,6 +25,17 @@ foreach ($i in $array){
 	###
 	$counter = $counter+1
 }
+
+## Execute a random search from the "array" list (Source: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-random)
+$random_query = Get-Random -InputObject $array
+$current_url = "$bingUrl$random_query"
+	Write-Host "Will test URL" $current_url
+	$ie.navigate($current_url)
+	while($ie.Busy) { Start-Sleep -Milliseconds 100 }
+	Start-Sleep -s 5
+$counter = $counter+1
+
+
 Write-Host "--------------------------------------------"
 Write-Host "FINISHED"
 Write-Host $counter "Bing visits"
