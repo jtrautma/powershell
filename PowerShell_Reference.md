@@ -31,6 +31,7 @@
 * https://gallery.technet.microsoft.com/scriptcenter/Getting-Cookies-using-3c373c7e#content
 * http://www.westerndevs.com/simple-powershell-automation-browser-based-tasks/
 * http://ilovepowershell.com/2010/12/27/oneliner-how-to-kill-all-internet-explorer-processes/
+* https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-random
 
 
 ---------------------------------------------------------------------------------------------------
@@ -600,4 +601,35 @@ Quit Internet Explorer instances
 	get-process iexplore | stop-process
     
 
+---------------------------------------------------------------------------------------------------
+
+Create a list called "my_list"
+    
+	$my_list = @(
+		"Denver",
+		"New York",
+		"Dallas"
+		)
+    
+
+---------------------------------------------------------------------------------------------------
+
+Iterate through the list called "my_list"
+    
+	foreach ($i in $my_list) {
+		Write-Host "Welcome to" $i
+	}
+    
+
+---------------------------------------------------------------------------------------------------
+
+Select a random number between 50 and 99
+    
+	Get-Random -Minimum 50 -Maximum 100
+    
+
+Select a random item from a list named "my_list"
+    
+	$random_item = Get-Random -InputObject $array
+    
 
