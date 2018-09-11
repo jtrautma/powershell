@@ -584,7 +584,7 @@ Retrieving all input fields from a website for test automation
 (Source: http://www.westerndevs.com/simple-powershell-automation-browser-based-tasks/)
     
 	$processName = "chrome"
-	$site = "https://kundenbereich.check24.de/user/login.html"
+	$site = "https://www.dart.org"
 	sleep -s 10
 	$wnd = Start-Process $processName $site -PassThru
 	sleep -s 20
