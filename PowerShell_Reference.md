@@ -26,6 +26,7 @@
 * http://jeffwouters.nl/index.php/2012/03/powershell-howto-calculate-the-number-of-characters-in-a-string/
 * https://stackoverflow.com/questions/35865272/how-do-i-update-json-file-using-powershell
 * https://stackoverflow.com/questions/20886243/press-any-key-to-continue
+* https://ss64.com/ps/syntax-compare.html
 
 
 **Test Automation with Powershell:**
