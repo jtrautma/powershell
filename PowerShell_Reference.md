@@ -25,6 +25,7 @@
 * https://blogs.technet.microsoft.com/heyscriptingguy/2016/06/27/use-windows-powershell-to-search-for-files/
 * http://jeffwouters.nl/index.php/2012/03/powershell-howto-calculate-the-number-of-characters-in-a-string/
 * https://stackoverflow.com/questions/35865272/how-do-i-update-json-file-using-powershell
+* https://stackoverflow.com/questions/20886243/press-any-key-to-continue
 
 
 **Test Automation with Powershell:**
@@ -476,9 +477,19 @@ Find out which ID the Atlanta office has
 	Write-Output $table | where {$_.city -eq "Atlanta"} | select {$_.id}
     
 
+Sort by "City" field
+    
+	$table | Sort-Object city
+    
+
 Display entire table
     
 	$table | where {$_}
+    
+Display table in different column order (or show only certain columns)
+    
+	$table | Format-Table -Property city, id, state
+	$table | Format-Table -Property city, id
     
 
 Hide table headers to save content into a variable
@@ -632,4 +643,33 @@ Select a random item from a list named "my_list"
     
 	$random_item = Get-Random -InputObject $array
     
+
+---------------------------------------------------------------------------------------------------
+
+Press any key to continue the script execution
+    
+	$HOST.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown") | OUT-NULL
+	$HOST.UI.RawUI.Flushinputbuffer()
+    
+
+---------------------------------------------------------------------------------------------------
+
+Find the newest file in a given folder (Downloads) of a given type (CSV) with a given name (offices)
+    
+	$latestFile = Get-Childitem -Path $downloadFolder *.csv | Where-Object {$_.name -match 'offices'} | Sort-Object LastWriteTime -Descending | Select-Object -first 1
+    
+
+Extract _just_ the file name of that latest file
+    
+	$latestFileName = $latestFile.name
+    
+
+Check whether file name is less than 1 character long
+    
+	if (($latestFileName | measure-object -character | Select-Object -expandproperty characters) -lt 1) {
+		Write-Warning "No Office CSV file in Downloads folder"
+	}
+    
+
+
 
