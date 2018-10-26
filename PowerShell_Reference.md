@@ -27,6 +27,10 @@
 * https://stackoverflow.com/questions/35865272/how-do-i-update-json-file-using-powershell
 * https://stackoverflow.com/questions/20886243/press-any-key-to-continue
 * https://ss64.com/ps/syntax-compare.html
+* https://blogs.technet.microsoft.com/heyscriptingguy/2008/06/02/hey-scripting-guy-how-can-i-use-leading-zeroes-when-displaying-a-value-in-windows-powershell/
+* https://community.spiceworks.com/scripts/show/2327-what-is-my-ip-get-whatismyip
+* https://stackoverflow.com/questions/9053573/powershell-html-parsing-get-information-from-a-website
+* https://powershell.org/forums/topic/want-to-select-3rd-word-of-a-single-string-and-put-it-into-a-variable/
 
 
 **Test Automation with Powershell:**
@@ -189,6 +193,14 @@ Put the response of a Rest API call into a log file: First create a variable tha
     
 
 ---------------------------------------------------------------------------------------------------
+
+In order to compare the response to an expected string or another response, it might be necessary to convert the response into a string
+    
+	IF ($Response.ToString() -eq "Desired String") {Write-Host "This is what I'm looking for"}
+	IF ($Response1.ToString() -eq $Response2.ToString()) {Write-Host "They are the same"}
+    
+
+---------------------------------------------------------------------------------------------------
 Find character position in a variable (we wanna find the PC name):
     
 	$myString = "237801_201011221155.xml"
@@ -264,6 +276,12 @@ Retrieve JSON object by field (from: https://stackoverflow.com/questions/1657541
 		Write-Host $Stuffs.Name"	|	"$Stuffs.Type
 	}
     
+
+2d) How many items are in the "Stuffs" array?
+    
+	$x.Stuffs.length
+    
+> Output is 2
 
 ---------------------------------------------------------------------------------------------------
 
@@ -468,6 +486,17 @@ Counting all its rows
 	$table.Count
     
 
+Display entire table (as table)
+    
+	$table
+    
+
+Display entire table with empty "where" argument
+    
+	$table | where {$_}
+    
+> Output is the same as for "$table"
+
 Query for Dallas office
     
 	$table | where {$_.city -eq "Dallas"}
@@ -483,10 +512,6 @@ Sort by "City" field
 	$table | Sort-Object city
     
 
-Display entire table
-    
-	$table | where {$_}
-    
 Display table in different column order (or show only certain columns)
     
 	$table | Format-Table -Property city, id, state
@@ -502,6 +527,30 @@ This, however, saves it with a few empty lines
     
 	$product_name | Measure-Object -Line
     
+
+Display entire table (as string)
+    
+	Write-Output $table
+    
+> Output: @{id=123; city=Dallas; state=Texas} @{id=456; city=Nashville; state=Tennessee} @{id=789; city=Atlanta; state=Georgia}
+
+Display first line of table (as string)
+    
+	Write-Output $table[0]
+    
+> Output: @{id=123; city=Dallas; state=Texas}
+
+Display the city in line 2 of the table
+    
+	Write-Output $table[1].city
+    
+> Output: Nashville
+
+Find out whether a certain value is inside the table
+    
+	"Dallas" -in $table.city
+    
+> Output: True
 
 
 ---------------------------------------------------------------------------------------------------
@@ -590,6 +639,18 @@ Count the number of characters in a string (will return 3)
 	$string | measure-object -character | select -expandproperty characters
     
 
+Count the number of words in a string (will return 2)
+    
+	$string = "Hello World"
+	$string | measure-object -word | Select-Object -expandproperty words
+    
+
+Grab the 2nd word from a string (will return "World")
+    
+	$string = "Hello World"
+	$string | % { $_.Split(' ')[1] }
+    
+
 ---------------------------------------------------------------------------------------------------
 
 Retrieving all input fields from a website for test automation
@@ -672,5 +733,40 @@ Check whether file name is less than 1 character long
 	}
     
 
+---------------------------------------------------------------------------------------------------
 
+Convert a number to a string with (up to) 5 leading zeroes and 2 decimal places
+    
+	$numStart = 0
+	$fiver = $numStart.ToString("00000.00")
+	Write-Host $fiver
+    
 
+Determine the type of a value
+    
+$num_value = 0
+$num_value.GetType() | Select-Object -Property Name
+$text_value = "Hello World"
+$text_value.GetType() | Select-Object -Property Name
+    
+
+---------------------------------------------------------------------------------------------------
+
+Determine my IP address
+(Source 1: https://community.spiceworks.com/scripts/show/2327-what-is-my-ip-get-whatismyip)
+(Source 2: https://stackoverflow.com/questions/9053573/powershell-html-parsing-get-information-from-a-website)
+This uses the "Invoke-Webrequest" method to visit a website that determines the IP address as well as the count words and grab a word functionalities described above
+    
+	$ipWebsiteUrl = "http://checkip.dyndns.org/"
+	$ipResponse = Invoke-WebRequest -Uri $ipWebsiteUrl -Method GET
+	$fullText = $ipResponse.AllElements | Select -First 1 -ExpandProperty innerText
+	$fullText
+	
+	## IP address can be determined if entire response (in $fullText) is 6 words long
+	IF (($fullText | measure-object -word | Select-Object -expandproperty words) -eq 6) {
+		Write-Host "Your IP address can be determined..."
+		$ipAddress = $fullText | % { $_.Split(' ')[5] }
+		Write-Host $ipAddress
+	}
+	ELSE {Write-Error "No IP address available"}
+    
