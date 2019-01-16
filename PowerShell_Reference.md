@@ -31,6 +31,7 @@
 * https://community.spiceworks.com/scripts/show/2327-what-is-my-ip-get-whatismyip
 * https://stackoverflow.com/questions/9053573/powershell-html-parsing-get-information-from-a-website
 * https://powershell.org/forums/topic/want-to-select-3rd-word-of-a-single-string-and-put-it-into-a-variable/
+* https://stackoverflow.com/questions/17434151/writing-new-lines-to-a-text-file-in-powershell
 
 
 **Test Automation with Powershell:**
@@ -116,6 +117,20 @@ Create Logfile: Log File doesn't have to exist previously. Running the write com
 * For relative paths _in same folder_, use `$Logfile = "autolog.txt"`
 * For relative paths _downwards_, use `$Logfile = ".\logs\autolog.txt"`
 * For relative paths _upwards_, use `$Logfile = ".\..\log.txt"`
+
+---------------------------------------------------------------------------------------------------
+
+Write multiple lines (like XML) into a log file: Use @""@
+    
+	$xmlContent = @"
+	<Account environment=$env accountType=$accountType>
+		<emailAddress>$email</emailAddress>
+		<userId>$user_id</userId>
+		<createdAt>$timestamp</createdAt>
+	</Account>
+	"@
+	Add-Content $Logfile -Value $xmlContent
+    
 
 ---------------------------------------------------------------------------------------------------
 
@@ -213,7 +228,7 @@ Find character position in a variable (we wanna find the PC name):
 
 Extract information (here: user ID) from an XML file by using "dot notation" to navigate through the XML structure:
     
-	[xml]$XmlDocument = Get-Content -PathC:\git\CreateUser\new_log.xml
+	[xml]$XmlDocument = Get-Content -Path C:\git\CreateUser\new_log.xml
 	$XmlDocument.rsp.api_data.user_id
     
 > Output is the user ID
