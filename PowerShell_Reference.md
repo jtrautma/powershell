@@ -37,6 +37,7 @@
 **Test Automation with Powershell:**
 * https://gallery.technet.microsoft.com/scriptcenter/Getting-Cookies-using-3c373c7e#content
 * http://www.westerndevs.com/simple-powershell-automation-browser-based-tasks/
+* https://cmdrkeene.com/automating-internet-explorer-with-powershell/
 * http://ilovepowershell.com/2010/12/27/oneliner-how-to-kill-all-internet-explorer-processes/
 * https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-random
 
