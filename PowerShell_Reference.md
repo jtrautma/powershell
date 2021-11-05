@@ -32,6 +32,7 @@
 * https://stackoverflow.com/questions/9053573/powershell-html-parsing-get-information-from-a-website
 * https://powershell.org/forums/topic/want-to-select-3rd-word-of-a-single-string-and-put-it-into-a-variable/
 * https://stackoverflow.com/questions/17434151/writing-new-lines-to-a-text-file-in-powershell
+* https://devblogs.microsoft.com/scripting/learn-four-ways-to-use-powershell-to-create-folders/
 
 
 **Test Automation with Powershell:**
@@ -51,6 +52,13 @@ Uncomment a line: Use "# "
 	The content in between won't be executed either
 	#>
     
+---------------------------------------------------------------------------------------------------
+
+Create a new folder on the fly
+* In the current folder: `md folderName`
+* With a particular path: `c:\folderName`
+    
+
 
 ---------------------------------------------------------------------------------------------------
 
