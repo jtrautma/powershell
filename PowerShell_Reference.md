@@ -33,6 +33,7 @@
 * https://powershell.org/forums/topic/want-to-select-3rd-word-of-a-single-string-and-put-it-into-a-variable/
 * https://stackoverflow.com/questions/17434151/writing-new-lines-to-a-text-file-in-powershell
 * https://devblogs.microsoft.com/scripting/learn-four-ways-to-use-powershell-to-create-folders/
+* https://stackoverflow.com/questions/7909167/how-to-quietly-remove-a-directory-with-content-in-powershell
 
 
 **Test Automation with Powershell:**
@@ -58,6 +59,11 @@ Create a new folder on the fly
 * In the current folder: `md folderName`
 * With a particular path: `c:\folderName`
     
+
+---------------------------------------------------------------------------------------------------
+
+Delete a folder with all its sub-folders and files
+* In the current folder: `Remove-Item -LiteralPath "folderName" -Force -Recurse`
 
 
 ---------------------------------------------------------------------------------------------------
