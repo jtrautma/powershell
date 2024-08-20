@@ -64,6 +64,7 @@ Create a new folder on the fly
 
 Delete a folder with all its sub-folders and files
 * In the current folder: `Remove-Item -LiteralPath "folderName" -Force -Recurse`
+* ``Remove-Item -Path "C:\Users\trautmann\git\udemyCypress\ngx-cypress-test - Kopie" -Recurse -Force``
 
 
 ---------------------------------------------------------------------------------------------------
